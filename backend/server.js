@@ -1,4 +1,3 @@
-import exp from "express";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import { connect } from "mongoose";
@@ -11,6 +10,7 @@ config();
 
 //create express app
 const app = exp();
+app.set("trust proxy", 1);
 //enable cors
 app.use(cors({
   origin:true,
