@@ -91,10 +91,12 @@ commonApp.post("/login", async (req, res, next) => {
 
   //set token to res header as httpOnly cookie
   res.cookie("token", signedToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-  });
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+  maxAge: 24 * 60 * 60 * 1000
+});
   //remove password from user document
   let userObj = user.toObject();
   delete userObj.password;
