@@ -1,4 +1,3 @@
-import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import { connect } from "mongoose";
 import { userApp } from "./APIs/UserAPI.js";
@@ -13,8 +12,11 @@ const app = exp();
 app.set("trust proxy", 1);
 //enable cors
 app.use(cors({
-  origin:true,
-  credentials:true
+  origin: "https://fullstack-srfv.vercel.app",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}))
 }))
 //add cookie parser middeleware
 app.use(cookieParser())
