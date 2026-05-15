@@ -1,4 +1,4 @@
-import exp from "express";
+ import exp from "express";
 import { UserModel } from "../models/UserModel.js";
 import { hash, compare } from "bcryptjs";
 import { config } from "dotenv";
@@ -12,7 +12,7 @@ import cloudinary from "../config/cloudinary.js";
 config();
 
 //Route for register
-commonApp.post("/users", upload.single("profileImageUrl"), async (req, res) => {
+commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next) => {
   let cloudinaryResult;
   try {
     let allowedRoles = ["USER", "AUTHOR"];
@@ -57,7 +57,7 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res) => {
 });
 
 //Route for Login(USER, AUTHOR and ADMIN)
-commonApp.post("/login", async (req, res) => {
+commonApp.post("/login", async (req, res, next) => {
   //console.log(req.body)
   //get user cred obj
   const { email, password } = req.body;
@@ -124,7 +124,7 @@ commonApp.get("/check-auth", verifyToken("USER", "AUTHOR", "ADMIN"), (req, res) 
 });
 
 //Change password
-commonApp.put("/password", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res) => {
+commonApp.put("/password", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res, next) => {
   //check current password and new password are same
   //get current password of user/admin/author
   //check the current password of req and user are not same
