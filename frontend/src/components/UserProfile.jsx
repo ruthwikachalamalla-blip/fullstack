@@ -28,7 +28,7 @@ function UserProfile() {
       setLoading(true);
       try {
         //read articles of all authors
-        let res=await axios.get("https://fullstack-3-paqt.onrender.com/user-api/articles",{withCredentials:true})
+        let res=await axios.get("https://fullstack-4-0tqq.onrender.com/user-api/articles",{withCredentials:true})
         //update articles state
         if(res.status===200){
           setArticles((await res).data.payload)
