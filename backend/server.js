@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import { connect } from "mongoose";
 import { userApp } from "./APIs/UserAPI.js";
 import { authorApp } from "./APIs/AuthorAPI.js";
@@ -16,7 +15,6 @@ app.use(cors({
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
-}))
 }))
 //add cookie parser middeleware
 app.use(cookieParser())
