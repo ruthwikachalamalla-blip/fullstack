@@ -14,11 +14,18 @@ const app = exp();
 app.set("trust proxy", 1);
 //enable cors
 app.use(cors({
-  origin: "https://fullstack-srfv.vercel.app",
+  origin: (origin, callback) => {
+    if (!origin || origin.endsWith(".vercel.app") || origin.includes("localhost")) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS blocked: " + origin));
+    }
+  },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}))
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
 //add cookie parser middeleware
 app.use(cookieParser())
 //body parser middleware
